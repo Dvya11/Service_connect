@@ -1,0 +1,141 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+    <div class="logo">
+        <i class="fa-solid fa-toolbox"></i> Service<span>Connect</span>
+    </div>
+    <nav>
+        <a href="#">Services</a>
+        <a href="#">Reviews</a>
+    </nav>
+</header>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero">
+    <div class="hero-left">
+        <span class="badge">TRUSTED BY 10,000+ HOMEOWNERS</span>
+
+        <h1>
+            Expert Home Services,
+            <span class="highlight">One Click Away.</span>
+        </h1>
+
+        <p>
+            Find verified professionals for plumbing, electrical work, carpentry, and more.
+            Transparent pricing, guaranteed quality.
+        </p>
+
+        <!-- ✅ UPDATED WORKING BUTTON -->
+        <div class="hero-btn">
+            <a asp-controller="Service"
+               asp-action="Service"
+               class="btn-primary"
+               style="text-decoration:none; display:inline-block;">
+                Find Service
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+        <div class="image-wrapper">
+            <img src="/images/Professional.png" alt="Professional" />
+        </div>
+
+        <div class="rating-card">
+            <div class="rating-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+                <small>VERIFIED PRO</small>
+                <strong>4.9/5 Rating</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="services">
+    <div class="section-header">
+        <h2>Our Top Rated Services</h2>
+        <a href="#">View All Services →</a>
+    </div>
+
+    <div class="card-container">
+        <div class="service-card">
+            <i class="fa-solid fa-wrench"></i>
+            <h3>Plumber</h3>
+            <p>Expert fixing for leaks, pipe replacements, and emergency plumbing issues.</p>
+            <button>Book Service</button>
+        </div>
+
+        <div class="service-card">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>Electrician</h3>
+            <p>Safe wiring, fixture installations, and complete circuit diagnostics.</p>
+            <button>Book Service</button>
+        </div>
+
+        <div class="service-card">
+            <i class="fa-solid fa-hammer"></i>
+            <h3>Carpenter</h3>
+            <p>Custom furniture repairs, cabinet installations, and detailed woodwork.</p>
+            <button>Book Service</button>
+        </div>
+    </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="how">
+    <h2>How it Works</h2>
+    <div class="steps">
+        <div class="step">
+            <div class="circle">01</div>
+            <h4>Search Service</h4>
+            <p>Tell us what you need and where.</p>
+        </div>
+        <div class="step active">
+            <div class="circle">02</div>
+            <h4>Choose & Book</h4>
+            <p>Compare ratings, reviews, and prices.</p>
+        </div>
+        <div class="step">
+            <div class="circle">03</div>
+            <h4>Relax & Smile</h4>
+            <p>The pro gets the job done securely.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="reviews">
+    <h2>What our Customers Say</h2>
+    <div class="review-cards">
+        <div class="review">
+            <h4>Sarah Jenkins</h4>
+            <p>"Found an amazing plumber within 10 minutes!"</p>
+        </div>
+
+        <div class="review">
+            <h4>Michael Chen</h4>
+            <p>"The electrician was professional and smart."</p>
+        </div>
+
+        <div class="review">
+            <h4>Elena Rodriguez</h4>
+            <p>"Carpentry exceeded my expectations."</p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+    <div>
+        <h2>Grow your business with Service Connect</h2>
+        <p>Join thousands of professionals growing daily.</p>
+        <button>Learn More</button>
+    </div>
+</section>

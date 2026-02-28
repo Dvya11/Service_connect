@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Service Connect - Login</title>
+
+    <style>
+        * {
+            font-family: 'Segoe UI', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f6f8f7;
+        }
+
+        .page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 40px;
+        }
+
+        .logo h2 {
+            margin: 8px 0;
+        }
+
+        .login-card {
+            background: #fff;
+            width: 360px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .login-card h3 {
+            margin: 0;
+        }
+
+        .login-card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .options a {
+            color: #00c853;
+            text-decoration: none;
+        }
+
+        button {
+            width: 100%;
+            background: #00e676;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00c853;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: #00c853;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error {
+            background: #ffe6e6;
+            color: red;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="logo">
+            <img src="~/Content/logo.png" alt="logo" />
+            <h2>Service Connect</h2>
+        </div>
+
+        <div class="login-card">
+            <h3>Welcome back!</h3>
+            <p>Please enter your details to sign in.</p>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="error">@ViewBag.Error</div>
+            }
+
+            <form method="post">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="name@company.com" required />
+
+                <label>Password</label>
+                <input type="password" name="password" placeholder="••••••••" required />
+
+                <div class="options">
+                    <label class="remember-me">
+                        <input type="checkbox" />
+                        <span>Remember me for 30 days</span>
+                    </label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="footer">
+                Don’t have an account?
+                <a asp-controller="Account" asp-action="Register">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
