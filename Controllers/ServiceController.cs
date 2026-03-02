@@ -1,9 +1,115 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service_connect.Models;
+using System.Collections.Generic;
+using System.Linq;
 
-public class ServiceController : Controller
+namespace Service_connect.Controllers
 {
-    public IActionResult Service()
+    public class ServiceController : Controller
     {
-        return View();
+        // 🔹 Services List Page
+        public IActionResult Service()
+        {
+            return View();
+        }
+
+        // 🔹 Experts Page
+        public IActionResult Index(string category)
+        {
+            List<ServiceExpert> experts = new List<ServiceExpert>
+            {
+                new ServiceExpert {
+                    Id = 1,
+                    Name="Rahul",
+                    Category="Plumber",
+                    Location="Mumbai",
+                    Distance=2,
+                    Rating=4.5,
+                    Description="Pipe repair expert",
+                    ImageUrl="https://randomuser.me/api/portraits/men/1.jpg"
+                },
+                new ServiceExpert {
+                    Id = 2,
+                    Name="Amit",
+                    Category="Electrician",
+                    Location="Delhi",
+                    Distance=3,
+                    Rating=4.8,
+                    Description="Wiring specialist",
+                    ImageUrl="https://randomuser.me/api/portraits/men/2.jpg"
+                },
+                new ServiceExpert {
+                    Id = 3,
+                    Name="Suresh",
+                    Category="Carpenter",
+                    Location="Ahmedabad",
+                    Distance=4,
+                    Rating=4.6,
+                    Description="Furniture repair expert",
+                    ImageUrl="https://randomuser.me/api/portraits/men/3.jpg"
+                }
+            };
+
+            // Category Filter (Case-insensitive)
+            if (!string.IsNullOrEmpty(category))
+            {
+                experts = experts
+                    .Where(x => x.Category.ToLower() == category.ToLower())
+                    .ToList();
+
+                ViewBag.SelectedCategory = category;
+            }
+            else
+            {
+                ViewBag.SelectedCategory = "All";
+            }
+
+            return View(experts);
+        }
+
+        // 🔹 Details Page (Request Visit Click kare to)
+        public IActionResult Details(int id)
+        {
+            List<ServiceExpert> experts = new List<ServiceExpert>
+            {
+                new ServiceExpert {
+                    Id = 1,
+                    Name="Rahul",
+                    Category="Plumber",
+                    Location="Mumbai",
+                    Distance=2,
+                    Rating=4.5,
+                    Description="Pipe repair expert",
+                    ImageUrl="https://randomuser.me/api/portraits/men/1.jpg"
+                },
+                new ServiceExpert {
+                    Id = 2,
+                    Name="Amit",
+                    Category="Electrician",
+                    Location="Delhi",
+                    Distance=3,
+                    Rating=4.8,
+                    Description="Wiring specialist",
+                    ImageUrl="https://randomuser.me/api/portraits/men/2.jpg"
+                },
+                new ServiceExpert {
+                    Id = 3,
+                    Name="Suresh",
+                    Category="Carpenter",
+                    Location="Ahmedabad",
+                    Distance=4,
+                    Rating=4.6,
+                    Description="Furniture repair expert",
+                    ImageUrl="https://randomuser.me/api/portraits/men/3.jpg"
+                }
+            };
+
+            var expert = experts.FirstOrDefault(x => x.Id == id);
+
+            if (expert == null)
+                return NotFound();
+
+            return View(expert);
+        }
     }
 }

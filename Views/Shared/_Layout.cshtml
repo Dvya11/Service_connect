@@ -11,17 +11,82 @@
     <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 
-    <!-- ✅ Bootstrap -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- ✅ Your CSS -->
+    <!-- Your CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body>
+<body style="font-family: 'Inter', sans-serif; background-color:#f3f5f4;">
 
-    @RenderBody()
+    <!-- ✅ NAVBAR START -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
 
-    <!-- ✅ Bootstrap JS (optional but recommended) -->
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold text-success" asp-controller="Home" asp-action="Index">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>
+                Service Connect
+            </a>
+
+            <!-- Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menu -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
+                            Home
+                        </a>
+                    </li>
+
+                    <!-- ✅ Services Link -->
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-controller="Service"
+                           asp-action="Service">
+                            Services
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            My Bookings
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- Login Button -->
+            <div class="d-flex">
+                <a asp-controller="Account" asp-action="Login"
+                   class="btn btn-success rounded-pill px-4">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- ✅ NAVBAR END -->
+
+    <!-- Page Content -->
+    <div class="container-fluid p-0">
+        @RenderBody()
+    </div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     @RenderSection("Scripts", required: false)

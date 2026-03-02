@@ -4,7 +4,6 @@ namespace Service_connect.Controllers
 {
     public class AccountController : Controller
     {
-        // LOGIN
         [HttpGet]
         public IActionResult Login()
         {
@@ -16,18 +15,30 @@ namespace Service_connect.Controllers
         {
             if (email == "admin@company.com" && password == "123456")
             {
-                return RedirectToAction("Dashboard", "Home");
+                return RedirectToAction("Service", "Services");
             }
 
             ViewBag.Error = "Invalid Email or Password";
             return View();
         }
 
-        // REGISTER / SIGNUP
         [HttpGet]
         public IActionResult Register()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(
+            string userType,
+            string firstName,
+            string lastName,
+            string email,
+            string category,
+            string experience,
+            string password)
+        {
+            return RedirectToAction("Service", "Service");
         }
     }
 }
