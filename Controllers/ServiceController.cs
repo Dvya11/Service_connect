@@ -16,41 +16,8 @@ namespace Service_connect.Controllers
         // 🔹 Experts Page
         public IActionResult Index(string category)
         {
-            List<ServiceExpert> experts = new List<ServiceExpert>
-            {
-                new ServiceExpert {
-                    Id = 1,
-                    Name="Rahul",
-                    Category="Plumber",
-                    Location="Mumbai",
-                    Distance=2,
-                    Rating=4.5,
-                    Description="Pipe repair expert",
-                    ImageUrl="https://randomuser.me/api/portraits/men/1.jpg"
-                },
-                new ServiceExpert {
-                    Id = 2,
-                    Name="Amit",
-                    Category="Electrician",
-                    Location="Delhi",
-                    Distance=3,
-                    Rating=4.8,
-                    Description="Wiring specialist",
-                    ImageUrl="https://randomuser.me/api/portraits/men/2.jpg"
-                },
-                new ServiceExpert {
-                    Id = 3,
-                    Name="Suresh",
-                    Category="Carpenter",
-                    Location="Ahmedabad",
-                    Distance=4,
-                    Rating=4.6,
-                    Description="Furniture repair expert",
-                    ImageUrl="https://randomuser.me/api/portraits/men/3.jpg"
-                }
-            };
+            List<ServiceExpert> experts = GetExperts();
 
-            // Category Filter (Case-insensitive)
             if (!string.IsNullOrEmpty(category))
             {
                 experts = experts
@@ -67,10 +34,43 @@ namespace Service_connect.Controllers
             return View(experts);
         }
 
-        // 🔹 Details Page (Request Visit Click kare to)
+        // 🔹 Details Page
         public IActionResult Details(int id)
         {
-            List<ServiceExpert> experts = new List<ServiceExpert>
+            var expert = GetExperts().FirstOrDefault(x => x.Id == id);
+
+            if (expert == null)
+                return NotFound();
+
+            return View(expert);
+        }
+
+        // 🔹 BOOK SERVICE PAGE (GET)  ✅ UPDATED
+        [HttpGet]
+        public IActionResult BookService(string expertName)
+        {
+            ViewBag.ExpertName = expertName;
+            return View();
+        }
+
+        // 🔹 BOOK SERVICE FORM SUBMIT (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult BookService(BookServiceViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["SuccessMessage"] = "Service Request Submitted Successfully!";
+                return RedirectToAction("BookService");
+            }
+
+            return View(model);
+        }
+
+        // 🔹 Common Expert List Method (Code Repeat Avoid)
+        private List<ServiceExpert> GetExperts()
+        {
+            return new List<ServiceExpert>
             {
                 new ServiceExpert {
                     Id = 1,
@@ -103,13 +103,6 @@ namespace Service_connect.Controllers
                     ImageUrl="https://randomuser.me/api/portraits/men/3.jpg"
                 }
             };
-
-            var expert = experts.FirstOrDefault(x => x.Id == id);
-
-            if (expert == null)
-                return NotFound();
-
-            return View(expert);
         }
     }
 }

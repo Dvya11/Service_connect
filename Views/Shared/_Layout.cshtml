@@ -17,6 +17,7 @@
     <!-- Your CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
+
 <body style="font-family: 'Inter', sans-serif; background-color:#f3f5f4;">
 
     <!-- ✅ NAVBAR START -->
@@ -34,7 +35,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Menu -->
+            <!-- Center Menu -->
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
 
@@ -44,7 +45,6 @@
                         </a>
                     </li>
 
-                    <!-- ✅ Services Link -->
                     <li class="nav-item">
                         <a class="nav-link"
                            asp-controller="Service"
@@ -68,14 +68,72 @@
                 </ul>
             </div>
 
-            <!-- Login Button -->
-            <div class="d-flex">
-                <a asp-controller="Account" asp-action="Login"
-                   class="btn btn-success rounded-pill px-4">
-                    Login
-                </a>
+            <!-- ✅ RIGHT SIDE (Login OR Profile) -->
+            @if (!(ViewData["HideLogin"] as bool? ?? false))
+            {
+                <!-- 🔹 Login Button -->
+                <div class="d-flex">
+                    <a asp-controller="Account" asp-action="Login"
+                       class="btn btn-success rounded-pill px-4">
+                        Login
+                    </a>
+                </div>
+            }
+            else
+            {
+                <!-- 🔹 Profile Icon with Dropdown -->
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                       href="#"
+                       id="profileDropdown"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
 
-            </div>
+                        <div style="width:42px;height:42px;
+                                    background:#19c463;
+                                    border-radius:50%;
+                                    display:flex;
+                                    align-items:center;
+                                    justify-content:center;
+                                    color:white;
+                                    font-size:18px;">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2"
+                        aria-labelledby="profileDropdown"
+                        style="border-radius:12px; min-width:180px;">
+
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-user me-2 text-success"></i>
+                                My Profile
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-calendar-check me-2 text-success"></i>
+                                My Bookings
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item text-danger"
+                               asp-controller="Account"
+                               asp-action="Logout">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                Logout
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            }
 
         </div>
     </nav>

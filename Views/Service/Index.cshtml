@@ -1,222 +1,296 @@
-﻿@model List<Service_connect.Models.ServiceExpert>
-
-@{
-    ViewData["Title"] = "Service Experts";
+﻿@{
+    ViewData["Title"] = "Service Providers";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["HideLogin"] = true;   // 👈 Ye line add karein
 }
 
 <style>
     body {
-        background-color: #f3f5f7;
-    }
-
-    .main-box {
-        background: #fff;
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        background: #f4f6f5;
+        font-family: 'Inter', sans-serif;
     }
 
     .page-title span {
-        color: #00c853;
-        font-weight: 600;
+        color: #19c463;
     }
 
-    .sidebar {
-        background: #f8f9fa;
-        padding: 20px;
-        border-radius: 12px;
-    }
-
-    .sidebar h6 {
-        font-weight: 600;
-        margin-top: 15px;
-        margin-bottom: 10px;
-        font-size: 14px;
-        color: #555;
-    }
-
-    .form-check-input:checked {
-        background-color: #00c853;
-        border-color: #00c853;
-    }
-
-    .search-box {
-        border-radius: 20px;
-        font-size: 14px;
+    .filters-box {
+        background: #fff;
+        padding: 25px;
+        border-radius: 18px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.05);
     }
 
     .service-card {
         background: #fff;
-        border-radius: 12px;
-        padding: 18px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-        transition: 0.3s;
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+        transition: 0.3s ease;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .service-card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-6px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .pro-img {
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 
     .badge-category {
         font-size: 11px;
-        background: #e8f5e9;
-        color: #00c853;
-        padding: 4px 10px;
-        border-radius: 15px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        background: #eafff3;
+        color: #19c463;
+        display: inline-block;
+        margin-bottom: 4px;
+    }
+
+    .rating {
+        font-size: 13px;
+        color: #f4b400;
         font-weight: 600;
     }
 
-    .btn-request {
-        background: #00c853;
-        color: #fff;
+    .btn-green {
+        background: #19c463;
+        border: none;
+        padding: 9px 22px;
         border-radius: 25px;
-        padding: 6px 20px;
+        font-size: 14px;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .btn-green:hover {
+        background: #149f52;
+        transform: scale(1.05);
+    }
+
+    .text-muted-small {
         font-size: 13px;
-    }
-
-    .btn-request:hover {
-        background: #00b44b;
-        color: #fff;
-    }
-
-    .pagination .page-link {
-        border-radius: 50%;
-        color: #00c853;
-        margin: 0 5px;
-    }
-
-    .pagination .active .page-link {
-        background: #00c853;
-        border-color: #00c853;
-        color: #fff;
+        color: #777;
     }
 </style>
 
-<div class="container mt-4">
+<div class="container mt-4 mb-5">
 
-    <div class="main-box">
+    <h3 class="fw-bold page-title mb-1">
+        Service Providers in <span>Garden City</span>
+    </h3>
+    <p class="text-muted-small">24 certified professionals available near you</p>
 
-        <!-- Title -->
-        <div class="mb-4">
-            <h4 class="page-title">
-                Service Providers in <span>Garden City</span>
-            </h4>
-            <small class="text-muted">24 certified professionals available near you</small>
+    <div class="row mt-4">
+
+        <!-- FILTER SECTION -->
+        <div class="col-md-3">
+            <div class="filters-box">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6>Filters</h6>
+                    <button class="btn btn-sm btn-outline-success" onclick="resetFilters()">Reset</button>
+                </div>
+
+                <!-- CATEGORY FILTER -->
+                <p class="text-muted-small fw-bold">CATEGORIES</p>
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input category-filter" type="checkbox" value="Plumber" checked>
+                    <label class="form-check-label">Plumber</label>
+                </div>
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input category-filter" type="checkbox" value="Electrician" checked>
+                    <label class="form-check-label">Electrician</label>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input category-filter" type="checkbox" value="Carpenter" checked>
+                    <label class="form-check-label">Carpenter</label>
+                </div>
+
+                <!-- LOCATION FILTER -->
+                <p class="text-muted-small fw-bold mt-3">LOCATION</p>
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input location-filter" type="checkbox" value="Garden City" checked>
+                    <label class="form-check-label">Garden City</label>
+                </div>
+
+                <div class="form-check mb-2">
+                    <input class="form-check-input location-filter" type="checkbox" value="West End" checked>
+                    <label class="form-check-label">West End</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input location-filter" type="checkbox" value="Downtown" checked>
+                    <label class="form-check-label">Downtown</label>
+                </div>
+
+            </div>
         </div>
 
-        <div class="row">
+        <!-- SERVICE CARDS -->
+        <div class="col-md-9">
+            <div class="row g-4" id="serviceContainer">
 
-            <!-- Sidebar Filter -->
-            <div class="col-md-3">
-                <div class="sidebar">
-
-                    <strong>Filters</strong>
-
-                    <h6>Categories</h6>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label">Plumber</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label">Carpenter</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label">Electrician</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label">HVAC Specialist</label>
-                    </div>
-
-                    <h6>Location</h6>
-
-                    <input type="text" class="form-control search-box mb-2" placeholder="Search cities...">
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" checked>
-                        <label class="form-check-label">Garden City</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label">North Hills</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label">South River</label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox">
-                        <label class="form-check-label">West End</label>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Service Cards (4 Boxes Same Layout) -->
-            <div class="col-md-9">
-                <div class="row">
-
-                    @foreach (var item in Model.Take(4))
-                    {
-                        <div class="col-md-6 mb-4">
-                            <div class="service-card">
-
-                                <div class="d-flex align-items-center">
-                                    <img src="@item.ImageUrl"
-                                         class="rounded-circle me-3"
-                                         width="55" height="55" />
-
-                                    <div>
-                                        <span class="badge-category">@item.Category</span>
-                                        <h6 class="mt-1 mb-0">@item.Name</h6>
-                                        <small class="text-muted">
-                                            @item.Distance miles away • @item.Location
-                                        </small>
-                                    </div>
-
-                                    <div class="ms-auto text-warning">
-                                        ⭐ @item.Rating
-                                    </div>
+                <!-- CARD 1 -->
+                <div class="col-md-6 service-item" data-category="Plumber" data-location="Garden City">
+                    <div class="service-card">
+                        <div>
+                            <div class="d-flex gap-3 align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="pro-img" />
+                                <div>
+                                    <span class="badge-category">PLUMBER</span>
+                                    <div class="rating">⭐ 4.9</div>
                                 </div>
-
-                                <p class="mt-3 text-muted" style="font-size:13px;">
-                                    @item.Description
-                                </p>
-
-                                <button class="btn btn-request">
-                                    Request Visit
-                                </button>
-
                             </div>
+                            <h5 class="fw-bold mt-3 mb-1">John Baker</h5>
+                            <p class="text-muted-small">
+                                Master plumber with 15 years experience.
+                            </p>
+                            <small class="text-muted">📍 Garden City</small>
                         </div>
-                    }
-
+                        <div class="text-end mt-3">
+                            <button class="btn-green" onclick="requestVisit('John Baker')">
+                                Request Visit
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Pagination -->
-                <nav>
-                    <ul class="pagination justify-content-center mt-3">
-                        <li class="page-item active"><a class="page-link">1</a></li>
-                        <li class="page-item"><a class="page-link">2</a></li>
-                        <li class="page-item"><a class="page-link">3</a></li>
-                    </ul>
-                </nav>
+                <!-- CARD 2 -->
+                <div class="col-md-6 service-item" data-category="Electrician" data-location="West End">
+                    <div class="service-card">
+                        <div>
+                            <div class="d-flex gap-3 align-items-center">
+                                <img src="https://randomuser.me/api/portraits/men/55.jpg" class="pro-img" />
+                                <div>
+                                    <span class="badge-category">ELECTRICIAN</span>
+                                    <div class="rating">⭐ 4.8</div>
+                                </div>
+                            </div>
+                            <h5 class="fw-bold mt-3 mb-1">Mike Collins</h5>
+                            <p class="text-muted-small">
+                                Licensed electrician expert in installations.
+                            </p>
+                            <small class="text-muted">📍 West End</small>
+                        </div>
+                        <div class="text-end mt-3">
+                            <button class="btn-green" onclick="requestVisit('Mike Collins')">
+                                Request Visit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="col-md-6 service-item" data-category="Carpenter" data-location="Downtown">
+                    <div class="service-card">
+                        <div>
+                            <div class="d-flex gap-3 align-items-center">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="pro-img" />
+                                <div>
+                                    <span class="badge-category">CARPENTER</span>
+                                    <div class="rating">⭐ 5.0</div>
+                                </div>
+                            </div>
+                            <h5 class="fw-bold mt-3 mb-1">Sarah Miller</h5>
+                            <p class="text-muted-small">
+                                Expert custom cabinetry specialist.
+                            </p>
+                            <small class="text-muted">📍 Downtown</small>
+                        </div>
+                        <div class="text-end mt-3">
+                            <button class="btn-green" onclick="requestVisit('Sarah Miller')">
+                                Request Visit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                 <!-- CARD 4 -->
+                <div class="col-md-6 service-item" data-category="Carpenter" data-location="Downtown">
+                    <div class="service-card">
+                        <div>
+                            <div class="d-flex gap-3 align-items-center">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="pro-img" />
+                                <div>
+                                    <span class="badge-category">CARPENTER</span>
+                                    <div class="rating">⭐ 5.0</div>
+                                </div>
+                            </div>
+                            <h5 class="fw-bold mt-3 mb-1">Sarah Miller</h5>
+                            <p class="text-muted-small">
+                                Expert custom cabinetry specialist.
+                            </p>
+                            <small class="text-muted">📍 Downtown</small>
+                        </div>
+                        <div class="text-end mt-3">
+                            <button class="btn-green" onclick="requestVisit('Sarah Miller')">
+                                Request Visit
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
-
         </div>
 
     </div>
-
 </div>
+
+<script>
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const locationFilters = document.querySelectorAll('.location-filter');
+    const items = document.querySelectorAll('.service-item');
+
+    categoryFilters.forEach(f => f.addEventListener('change', filterServices));
+    locationFilters.forEach(f => f.addEventListener('change', filterServices));
+
+    function filterServices() {
+
+        const selectedCategories = Array.from(categoryFilters)
+            .filter(f => f.checked)
+            .map(f => f.value);
+
+        const selectedLocations = Array.from(locationFilters)
+            .filter(f => f.checked)
+            .map(f => f.value);
+
+        items.forEach(item => {
+
+            const matchCategory = selectedCategories.includes(item.dataset.category);
+            const matchLocation = selectedLocations.includes(item.dataset.location);
+
+            if (matchCategory && matchLocation) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+
+        });
+    }
+
+    function resetFilters() {
+        categoryFilters.forEach(f => f.checked = true);
+        locationFilters.forEach(f => f.checked = true);
+        filterServices();
+    }
+
+    function requestVisit(name) {
+        window.location.href = '/Service/BookService?expertName=' + encodeURIComponent(name);
+    }
+</script>
