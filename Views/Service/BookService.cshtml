@@ -32,25 +32,38 @@
         border-radius: 10px;
     }
 
+    /* 🔥 FIXED BUTTON STYLE */
     .submit-btn {
-        background: #19c463;
-        border: none;
-        padding: 10px 25px;
-        border-radius: 8px;
-        color: white;
+        background-color: #19c463 !important;
+        border: none !important;
+        padding: 12px 28px !important;
+        border-radius: 30px !important;
+        color: #ffffff !important;
         font-weight: 600;
+        font-size: 15px;
+        display: inline-block;
+        text-decoration: none;
+        transition: 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .submit-btn:hover {
-        background: #16a956;
+        background-color: #149f52 !important;
+        transform: scale(1.05);
+        color: white !important;
+    }
+
+    /* Back button improve */
+    .btn-back {
+        padding: 10px 20px;
+        border-radius: 25px;
     }
 </style>
 
 <div class="container mt-5 mb-5">
 
-    <h3 class="mb-2">Book Your Service</h3>
+    <h3 class="mb-2 fw-bold">Book Your Service</h3>
 
-    <!-- ✅ Expert Name Display -->
     @if (ViewBag.ExpertName != null)
     {
         <p class="text-success mb-3">
@@ -58,7 +71,6 @@
         </p>
     }
 
-    <!-- ✅ Success Message -->
     @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success">
@@ -68,11 +80,9 @@
 
     <div class="service-card">
 
-        <!-- ✅ FORM START -->
         <form asp-action="BookService" method="post">
             @Html.AntiForgeryToken()
 
-            <!-- Hidden Expert Name -->
             <input type="hidden" name="ExpertName" value="@ViewBag.ExpertName" />
 
             <!-- Location -->
@@ -81,10 +91,8 @@
                 <input asp-for="Location" class="form-control" placeholder="Enter your address" />
                 <span asp-validation-for="Location" class="text-danger"></span>
 
-                <!-- ✅ Map Image Preview -->
                 <div class="map-box mt-3">
-                    <img src="https://maps.googleapis.com/maps/api/staticmap?center=Mumbai&zoom=13&size=600x300&maptype=roadmap&markers=color:red%7CMumbai"
-                         alt="Map Preview">
+                    <img src="/images/MAP.png" alt="Map Preview">
                 </div>
             </div>
 
@@ -100,15 +108,17 @@
             </div>
 
             <!-- Buttons -->
-            <div class="d-flex justify-content-between mt-4">
-                <a href="/Service/Index" class="btn btn-light">Back</a>
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <a href="/Service/Index" class="btn btn-light btn-back">
+                    ← Back
+                </a>
+
                 <button type="submit" class="submit-btn">
                     Submit Request →
                 </button>
             </div>
 
         </form>
-        <!-- ✅ FORM END -->
 
     </div>
 

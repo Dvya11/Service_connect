@@ -45,7 +45,7 @@ namespace Service_connect.Controllers
             return View(expert);
         }
 
-        // 🔹 BOOK SERVICE PAGE (GET)  ✅ UPDATED
+        // 🔹 BOOK SERVICE PAGE (GET)
         [HttpGet]
         public IActionResult BookService(string expertName)
         {
@@ -60,47 +60,60 @@ namespace Service_connect.Controllers
         {
             if (ModelState.IsValid)
             {
-                TempData["SuccessMessage"] = "Service Request Submitted Successfully!";
-                return RedirectToAction("BookService");
+                return RedirectToAction("Success");
             }
 
             return View(model);
         }
 
-        // 🔹 Common Expert List Method (Code Repeat Avoid)
+        // 🔹 SUCCESS PAGE (Views/Request/Success.cshtml)
+        public IActionResult Success()
+        {
+            return View("~/Views/Request/Success.cshtml");
+        }
+
+        // 🔹 LOGOUT METHOD
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            // Future me authentication logout logic yaha aayega
+            return RedirectToAction("Index", "Home");
+        }
+
+        // 🔹 Common Expert List Method
         private List<ServiceExpert> GetExperts()
         {
             return new List<ServiceExpert>
             {
                 new ServiceExpert {
                     Id = 1,
-                    Name="Rahul",
-                    Category="Plumber",
-                    Location="Mumbai",
-                    Distance=2,
-                    Rating=4.5,
-                    Description="Pipe repair expert",
-                    ImageUrl="https://randomuser.me/api/portraits/men/1.jpg"
+                    Name = "Rahul",
+                    Category = "Plumber",
+                    Location = "Mumbai",
+                    Distance = 2,
+                    Rating = 4.5,
+                    Description = "Pipe repair expert",
+                    ImageUrl = "https://randomuser.me/api/portraits/men/1.jpg"
                 },
                 new ServiceExpert {
                     Id = 2,
-                    Name="Amit",
-                    Category="Electrician",
-                    Location="Delhi",
-                    Distance=3,
-                    Rating=4.8,
-                    Description="Wiring specialist",
-                    ImageUrl="https://randomuser.me/api/portraits/men/2.jpg"
+                    Name = "Amit",
+                    Category = "Electrician",
+                    Location = "Delhi",
+                    Distance = 3,
+                    Rating = 4.8,
+                    Description = "Wiring specialist",
+                    ImageUrl = "https://randomuser.me/api/portraits/men/2.jpg"
                 },
                 new ServiceExpert {
                     Id = 3,
-                    Name="Suresh",
-                    Category="Carpenter",
-                    Location="Ahmedabad",
-                    Distance=4,
-                    Rating=4.6,
-                    Description="Furniture repair expert",
-                    ImageUrl="https://randomuser.me/api/portraits/men/3.jpg"
+                    Name = "Suresh",
+                    Category = "Carpenter",
+                    Location = "Ahmedabad",
+                    Distance = 4,
+                    Rating = 4.6,
+                    Description = "Furniture repair expert",
+                    ImageUrl = "https://randomuser.me/api/portraits/men/3.jpg"
                 }
             };
         }

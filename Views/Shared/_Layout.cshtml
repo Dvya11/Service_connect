@@ -122,13 +122,20 @@
 
                         <li><hr class="dropdown-divider"></li>
 
-                        <li>
-                            <a class="dropdown-item text-danger"
-                               asp-controller="Account"
-                               asp-action="Logout">
-                                <i class="fa-solid fa-right-from-bracket me-2"></i>
-                                Logout
-                            </a>
+                        <!-- ✅ UPDATED LOGOUT BUTTON (ServiceController → Logout GET) -->
+                        <li class="px-3 pb-2">
+                            <form asp-controller="Service"
+                                  asp-action="Logout"
+                                  method="get"
+                                  class="d-inline w-100">
+
+                                <button type="submit"
+                                        class="btn btn-outline-danger w-100">
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                    Logout
+                                </button>
+
+                            </form>
                         </li>
 
                     </ul>
