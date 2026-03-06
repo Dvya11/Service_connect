@@ -73,11 +73,11 @@ namespace Service_connect.Controllers
         }
 
         // 🔹 LOGOUT METHOD
-        [HttpPost]
+        [HttpGet]
         public IActionResult Logout()
         {
-            // Future me authentication logout logic yaha aayega
-            return RedirectToAction("Index", "Home");
+            HttpContext.Session.Clear();   // session clear karega
+            return View(); // Logout.cshtml open karega
         }
 
         // 🔹 Common Expert List Method

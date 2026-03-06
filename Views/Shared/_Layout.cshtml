@@ -20,7 +20,7 @@
 
 <body style="font-family: 'Inter', sans-serif; background-color:#f3f5f4;">
 
-    <!-- ✅ NAVBAR START -->
+    <!-- NAVBAR START -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container">
 
@@ -68,10 +68,9 @@
                 </ul>
             </div>
 
-            <!-- ✅ RIGHT SIDE (Login OR Profile) -->
+            <!-- RIGHT SIDE -->
             @if (!(ViewData["HideLogin"] as bool? ?? false))
             {
-                <!-- 🔹 Login Button -->
                 <div class="d-flex">
                     <a asp-controller="Account" asp-action="Login"
                        class="btn btn-success rounded-pill px-4">
@@ -81,7 +80,7 @@
             }
             else
             {
-                <!-- 🔹 Profile Icon with Dropdown -->
+                <!-- Profile Dropdown -->
                 <div class="dropdown">
                     <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
                        href="#"
@@ -106,15 +105,20 @@
                         aria-labelledby="profileDropdown"
                         style="border-radius:12px; min-width:180px;">
 
+                        <!-- ✅ UPDATED PROFILE LINK -->
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item"
+                               asp-controller="Customer"
+                               asp-action="Dashboard">
                                 <i class="fa-solid fa-user me-2 text-success"></i>
                                 My Profile
                             </a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item"
+                               asp-controller="Customer"
+                               asp-action="Dashboard">
                                 <i class="fa-solid fa-calendar-check me-2 text-success"></i>
                                 My Bookings
                             </a>
@@ -122,20 +126,13 @@
 
                         <li><hr class="dropdown-divider"></li>
 
-                        <!-- ✅ UPDATED LOGOUT BUTTON (ServiceController → Logout GET) -->
-                        <li class="px-3 pb-2">
-                            <form asp-controller="Service"
-                                  asp-action="Logout"
-                                  method="get"
-                                  class="d-inline w-100">
-
-                                <button type="submit"
-                                        class="btn btn-outline-danger w-100">
-                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
-                                    Logout
-                                </button>
-
-                            </form>
+                        <li>
+                            <a asp-controller="Service"
+                               asp-action="Logout"
+                               class="dropdown-item text-danger">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                Logout
+                            </a>
                         </li>
 
                     </ul>
@@ -144,7 +141,6 @@
 
         </div>
     </nav>
-    <!-- ✅ NAVBAR END -->
 
     <!-- Page Content -->
     <div class="container-fluid p-0">

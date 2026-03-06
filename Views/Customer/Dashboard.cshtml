@@ -1,0 +1,299 @@
+﻿@model List<Service_connect.Controllers.ServiceRequest>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Customer Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            background: #f3f5f4;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            background: #ffffff;
+            padding: 25px 15px;
+            border-right: 1px solid #eee;
+        }
+
+        .logo-box {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .logo-box h5 {
+            font-weight: 700;
+            color: #16a34a;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #555;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        .sidebar a:hover {
+            background: #e6f9ef;
+            color: #16a34a;
+        }
+
+        .sidebar a.active {
+            background: linear-gradient(90deg, #16a34a, #22c55e);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(22,163,74,0.3);
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: 250px;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-box {
+            width: 350px;
+        }
+
+        /* CONTENT */
+        .content {
+            padding: 30px;
+        }
+
+        .green-btn {
+            background: linear-gradient(90deg, #16a34a, #22c55e);
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: none;
+        }
+
+        .green-btn:hover {
+            opacity: 0.9;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-card i {
+            font-size: 30px;
+            color: #16a34a;
+        }
+
+        .card-box {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        }
+
+        footer {
+            padding: 20px 30px;
+            font-size: 14px;
+            color: #777;
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+        <div class="logo-box">
+            <h5>
+                <i class="fa-solid fa-bolt"></i>
+                Service Connect
+            </h5>
+            <small class="text-muted">Customer Portal</small>
+        </div>
+
+        <!-- Dashboard -->
+        <a asp-controller="Customer" asp-action="Dashboard" class="active">
+            <i class="fa-solid fa-chart-line"></i> Dashboard
+        </a>
+
+        <!-- My Bookings -->
+        <a asp-controller="Bookings" asp-action="MyBookings">
+            <i class="fa-solid fa-calendar-check"></i> My Bookings
+        </a>
+
+        <!-- Profile -->
+        <a asp-controller="Customer" asp-action="Profile">
+            <i class="fa-solid fa-user"></i> Profile
+        </a>
+
+        <!-- Settings -->
+        <a asp-controller="Customer" asp-action="Settings">
+            <i class="fa-solid fa-gear"></i> Settings
+        </a>
+
+        <!-- Logout -->
+        <a asp-controller="Account" asp-action="Logout" class="text-danger">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </a>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <input type="text" class="form-control search-box"
+                   placeholder="Search services..." />
+
+            <div>
+                <strong>@ViewBag.UserName</strong>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h3>Hello, @ViewBag.UserName 👋</h3>
+                    <p class="text-muted">
+                        You have <span class="text-success">@ViewBag.Pending active requests</span>
+                        waiting.
+                    </p>
+                </div>
+
+                <button class="green-btn">
+                    <i class="fa-solid fa-plus"></i> Book New Service
+                </button>
+            </div>
+
+            <!-- STATS -->
+            <div class="row mt-4">
+
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div>
+                            <h2>@ViewBag.Pending</h2>
+                            <p class="mb-0 text-muted">Pending Requests</p>
+                        </div>
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div>
+                            <h2>@ViewBag.Accepted</h2>
+                            <p class="mb-0 text-muted">Accepted Services</p>
+                        </div>
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div>
+                            <h2>@ViewBag.Completed</h2>
+                            <p class="mb-0 text-muted">Completed Services</p>
+                        </div>
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TABLE -->
+            <div class="card-box mt-5">
+                <h5>Active Service Requests</h5>
+
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ProviderName</td>
+                                <td>@item.ServiceType</td>
+                                <td>@item.Date</td>
+                                <td>
+                                    @if (item.Status == "Accepted")
+                                    {
+                                        <span class="badge bg-success">Accepted</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+        <footer class="d-flex justify-content-between">
+            <span>© 2023 Service Connect</span>
+            <div>
+                <a href="#" class="text-muted me-3">Privacy</a>
+                <a href="#" class="text-muted me-3">Terms</a>
+                <a href="#" class="text-muted">Help</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

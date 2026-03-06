@@ -1,0 +1,250 @@
+﻿@model List<Service_connect.Models.Booking>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>My Bookings</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7f6;
+        }
+
+        .dashboard {
+            display: flex;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            width: 240px;
+            background: white;
+            height: 100vh;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .sidebar ul li.active a {
+            background: #dff5e6;
+            color: #1bbf60;
+            font-weight: bold;
+        }
+
+        .sidebar ul li.logout a {
+            color: red;
+        }
+
+        /* Main */
+
+        .main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .new-btn {
+            background: #19c463;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .booking-list {
+            margin-top: 30px;
+        }
+
+        /* Booking Card */
+
+        .booking-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .booking-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .booking-info h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .booking-info p {
+            margin: 5px 0;
+            color: gray;
+        }
+
+        .date {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Status */
+
+        .status {
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+
+        .pending {
+            background: #ffe8cc;
+            color: #ff8c00;
+        }
+
+        .completed {
+            background: #d4f5df;
+            color: #0a9d4b;
+        }
+
+        .rejected {
+            background: #ffd6d6;
+            color: red;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <h2 class="logo">⚡ Service Connect</h2>
+
+        <ul>
+
+            <li>
+                <a asp-controller="Customer" asp-action="Dashboard">
+                    <i class="fa fa-home"></i> Dashboard
+                </a>
+            </li>
+
+            <li class="active">
+                <a asp-controller="Bookings" asp-action="MyBookings">
+                    <i class="fa-solid fa-calendar-check"></i> My Bookings
+                </a>
+            </li>
+
+            <!-- PROFILE LINK (Admin/Profile) -->
+
+            <li>
+                <a asp-controller="Admin" asp-action="Profile">
+                    <i class="fa fa-user"></i> Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-gear"></i> Settings
+                </a>
+            </li>
+
+            <li class="logout">
+                <a asp-controller="Account" asp-action="Logout">
+                    <i class="fa fa-sign-out-alt"></i> Sign Out
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="main">
+
+        <div class="header">
+            <h1>My Bookings</h1>
+            <button class="new-btn">+ New Booking</button>
+        </div>
+
+        <div class="booking-list">
+
+            @foreach (var item in Model)
+            {
+                <div class="booking-card">
+
+                    <img src="@item.Image" />
+
+                    <div class="booking-info">
+
+                        <h3>
+                            @item.CustomerName
+
+                            <span class="status @item.Status.ToLower()">
+                                @item.Status
+                            </span>
+                        </h3>
+
+                        <p>@item.Service</p>
+
+                        <div class="date">
+                            📅 @item.Date &nbsp;&nbsp; ⏰ @item.Time
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
