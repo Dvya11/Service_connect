@@ -1,39 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
 using System.Threading.Tasks;
+using Service_center.Models;
 
-namespace Service_connect.Controllers
+namespace Service_center.Controllers
 {
     public class AccountController : Controller
     {
-        // ================= LOGIN =================
 
+        // ===== LOGIN PAGE LOAD =====
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        // ===== LOGIN BUTTON CLICK =====
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            if (email == "admin@company.com" && password == "123456")
+            if (email == "dchauhan664@rku.ac.in" && password == "123456")
             {
-                return RedirectToAction("Dashboard", "Customer");
+                TempData["Success"] = "Successfully Login";
+
+                // Same login page par hi rehna
+                return View();
             }
 
             ViewBag.Error = "Invalid Email or Password";
             return View();
         }
 
-        // ================= REGISTER =================
-
+        // ===== REGISTER PAGE LOAD =====
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
+        // ===== REGISTER BUTTON CLICK =====
         [HttpPost]
         public IActionResult Register(
             string userType,
@@ -44,23 +49,34 @@ namespace Service_connect.Controllers
             string experience,
             string password)
         {
-            // (Here you can save user to database later)
+            // Future: Database save logic
 
-            // After register redirect to Service page
-            return RedirectToAction("Service", "Service");
+            TempData["Success"] = "Registration Successful";
+            return RedirectToAction("Login");
         }
 
-        // ================= LOGOUT =================
+        // ===== CHANGE PASSWORD PAGE LOAD =====
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
 
+        // ===== CHANGE PASSWORD BUTTON CLICK =====
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            // Direct redirect for testing
+            return RedirectToAction("Settings", "Customer");
+        }
+
+        // ===== LOGOUT =====
         public async Task<IActionResult> Logout()
         {
-            // Clear Authentication Cookie (if using cookie auth)
             await HttpContext.SignOutAsync();
-
-            // Clear Session
             HttpContext.Session.Clear();
 
-            return View(); // Views/Account/Logout.cshtml
+            return RedirectToAction("Login");
         }
     }
 }
