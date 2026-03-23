@@ -55,14 +55,14 @@ namespace Service_center.Controllers
             return RedirectToAction("Login");
         }
 
-        // ===== CHANGE PASSWORD PAGE LOAD =====
+        // CHANGE PASSWORD PAGE LOAD 
         [HttpGet]
         public IActionResult ChangePassword()
         {
             return View();
         }
 
-        // ===== CHANGE PASSWORD BUTTON CLICK =====
+        // CHANGE PASSWORD BUTTON CLICK 
         [HttpPost]
         public IActionResult ChangePassword(ChangePasswordViewModel model)
         {
@@ -70,7 +70,7 @@ namespace Service_center.Controllers
             return RedirectToAction("Settings", "Customer");
         }
 
-        // ===== LOGOUT =====
+        //  LOGOUT 
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
