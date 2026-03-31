@@ -8,14 +8,14 @@ namespace Service_center.Controllers
     public class AccountController : Controller
     {
 
-        // ===== LOGIN PAGE LOAD =====
+        //  LOGIN PAGE LOAD 
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        // ===== LOGIN BUTTON CLICK =====
+        //  LOGIN BUTTON CLICK 
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
@@ -31,14 +31,14 @@ namespace Service_center.Controllers
             return View();
         }
 
-        // ===== REGISTER PAGE LOAD =====
+        //  REGISTER PAGE LOAD 
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // ===== REGISTER BUTTON CLICK =====
+        //  REGISTER BUTTON CLICK 
         [HttpPost]
         public IActionResult Register(
             string userType,
