@@ -7,7 +7,7 @@ namespace Service_connect.Controllers
     public class CustomerController : Controller
     {
 
-        // ================= DASHBOARD =================
+        // ========= DASHBOARD ==========
         public IActionResult Dashboard()
         {
             ViewBag.UserName = "Alex Thompson";
