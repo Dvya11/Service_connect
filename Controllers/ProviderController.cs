@@ -13,16 +13,16 @@ namespace Service_connect.Controllers
             new VisitRequest
             {
                 Id = 1,
-                CustomerName = "Sarah Jenkins",
-                Address = "42 Oak Street, Garden City",
+                CustomerName = "Manav",
+                Address = "Rakjot City",
                 Description = "Leaking kitchen faucet needs urgent repair.",
                 Status = "Pending"
             },
             new VisitRequest
             {
                 Id = 2,
-                CustomerName = "Marcus Thorne",
-                Address = "112 Maple Avenue, Westside",
+                CustomerName = "Rahul",
+                Address = "Ahemdabad",
                 Description = "Main outdoor pipe burst.",
                 Status = "Pending"
             }

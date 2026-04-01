@@ -2,11 +2,18 @@
 {
     public class Booking
     {
-        public string? CustomerName { get; set; }
-        public string? Service { get; set; }
-        public string? Status { get; set; }
-        public string? Date { get; set; }
-        public string? Time { get; set; }
-        public string? Image { get; set; }
+        public int Id { get; set; }
+
+        public string CustomerName { get; set; }
+
+        public string Service { get; set; }
+
+        public DateTime Date { get; set; }   // ✅ must be DateTime
+
+        public string Time { get; set; }
+
+        public string Status { get; set; }
+
+        public string Image { get; set; }    // ✅ required
     }
 }
