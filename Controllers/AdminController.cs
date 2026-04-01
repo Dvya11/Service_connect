@@ -16,7 +16,7 @@ namespace Service_connect.Controllers
         [HttpPost]
         public IActionResult Login(string email, string password)
         {
-            if (email == "admin@gmail.com" && password == "admin123")
+            if (email == "divya@gmail.com" && password == "divya123")
             {
                 TempData["Success"] = "Admin Login Successfully";
                 return RedirectToAction("Dashboard", "Customer");
