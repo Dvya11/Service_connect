@@ -9,6 +9,28 @@
         font-family: 'Inter', sans-serif;
     }
 
+    /* LOGIN HIDE */
+    a[href*="Login"] {
+        display: none !important;
+    }
+
+.nav-extra {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-left: auto;   /* 🔥 push to right */
+}
+
+.nav-extra input {
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.nav-extra i {
+    color: #19c463;
+    font-size: 20px;
+}
+
     .page-title span {
         color: #19c463;
     }
@@ -81,6 +103,8 @@
         color: #777;
     }
 </style>
+
+
 
 <div class="container mt-4 mb-5">
 
@@ -311,4 +335,25 @@
     function requestVisit(name) {
         window.location.href = '/Service/BookService?expertName=' + encodeURIComponent(name);
     }
+</script>
+
+<script>
+    window.onload = function () {
+        let nav = document.querySelector(".navbar-collapse");
+
+        if (nav) {
+            let div = document.createElement("div");
+            div.className = "nav-extra";
+
+            div.innerHTML = `
+                <input type="text" placeholder="Search">
+                <button class="btn btn-green btn-sm">Go</button>
+                <a href="/Account/Profile">
+                    <i class="fa fa-user-circle"></i>
+                </a>
+            `;
+
+            nav.appendChild(div);  // 🔥 right side me add hoga
+        }
+    };
 </script>

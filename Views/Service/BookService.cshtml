@@ -5,12 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
 <style>
     body {
         background: #f4f6f5;
         font-family: 'Segoe UI', sans-serif;
     }
 
+    /* LOGIN HIDE */
+    a[href*="Login"] {
+        display: none !important;
+    }
+
+    /* PROFILE RIGHT SIDE */
+   .nav-profile {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav-profile a {
+    margin-left: auto;
+}
+
+.nav-profile i {
+    font-size: 32px;   /* 🔥 size bada */
+    color: #19c463;
+}
     .service-card {
         background: white;
         padding: 30px;
@@ -32,7 +55,6 @@
         border-radius: 10px;
     }
 
-    /* 🔥 FIXED BUTTON STYLE */
     .submit-btn {
         background-color: #19c463 !important;
         border: none !important;
@@ -53,7 +75,6 @@
         color: white !important;
     }
 
-    /* Back button improve */
     .btn-back {
         padding: 10px 20px;
         border-radius: 25px;
@@ -123,6 +144,26 @@
     </div>
 
 </div>
+
+<script>
+    // NAVBAR PROFILE ADD (RIGHT SIDE)
+    window.onload = function () {
+        let nav = document.querySelector(".navbar-collapse");
+
+        if (nav) {
+            let div = document.createElement("div");
+            div.className = "nav-profile";
+
+            div.innerHTML = `
+                <a href="/Account/Profile">
+                    <i class="fa fa-user-circle"></i>
+                </a>
+            `;
+
+            nav.appendChild(div);
+        }
+    };
+</script>
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
